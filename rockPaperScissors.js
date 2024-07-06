@@ -44,6 +44,13 @@ function getHumanChoice() {
     return choice.toLowerCase();
 }
 
+/**
+ * Plays a round of Rock, Paper, Scissors between the human and computer.
+ * Determines the winner by comparing the choices and updates scores accordingly.
+ *
+ * @param {string} humanChoice - The human player's choice, which should be either "rock", "paper", or "scissors".
+ * @param {string} computerChoice - The computer's choice, which should be either "rock", "paper", or "scissors".
+ */
 function playRound(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
         console.log("Game drawn!");
