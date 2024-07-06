@@ -60,7 +60,7 @@ function playRound(humanChoice, computerChoice) {
         (humanChoice === "paper" && computerChoice === "rock")
     ) {
         humanScore++;
-        console.log("You wins!");
+        console.log("You win!");
         console.log(`You : ${humanScore} - ${computerScore} Computer`);
     } else {
         computerScore++;
