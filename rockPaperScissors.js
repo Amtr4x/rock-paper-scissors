@@ -69,6 +69,20 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+        playRound(getHumanChoice(), getComputerChoice());
+    }
+
+    console.log(
+        `The final winner ${
+            humanScore > computerScore ? "are You!!!" : "is the Computer :("
+        }`
+    );
+}
+
 // ********************************************* Main Execution *********************************************************
 let humanScore = 0;
 let computerScore = 0;
+
+playGame();
