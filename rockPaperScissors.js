@@ -18,6 +18,12 @@ function getComputerChoice() {
     }
 }
 
+/**
+ * Prompts the user to input their choice among "rock", "paper", or "scissors".
+ * Keeps prompting until a valid choice is entered.
+ *
+ * @returns {string} The user's entered choice, converted to the correct case (e.g., "ROCK").
+ */
 function getHumanChoice() {
     let choice = "";
 
