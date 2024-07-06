@@ -17,3 +17,23 @@ function getComputerChoice() {
         return CHOICES[2];
     }
 }
+
+function getHumanChoice() {
+    let choice = "";
+
+    while (
+        choice.toLowerCase() !== "rock" &&
+        choice.toLowerCase() !== "paper" &&
+        choice.toLowerCase() !== "scissors"
+    ) {
+        let input = prompt(
+            "(Rock, Paper, Scissors)\nPlease introduce your choice: "
+        );
+
+        if (input !== null) {
+            choice = input;
+        }
+    }
+
+    return choice;
+}
