@@ -69,6 +69,10 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+/**
+ * Plays a full game of Rock, Paper, Scissors, consisting of 5 rounds.
+ * Displays the results of each round and the final winner based on scores.
+ */
 function playGame() {
     for (let i = 0; i < 5; i++) {
         playRound(getHumanChoice(), getComputerChoice());
