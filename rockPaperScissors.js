@@ -41,5 +41,27 @@ function getHumanChoice() {
         }
     }
 
-    return choice;
+    return choice.toLocaleLowerCase();
 }
+
+function playRound(humanChoice, computerChoice, humanScore, computerScore) {
+    if (humanChoice === computerChoice) {
+        console.log("Game drawn!");
+    } else if (
+        (humanChoice === "rock" && computerChoice === "scissors") ||
+        (humanChoice === "scissors" && computerChoice === "paper") ||
+        (humanChoice === "paper" && computerChoice === "rock")
+    ) {
+        humanScore++;
+        console.log("You wins!");
+        console.log(`You : ${humanScore} - ${computerScore} Computer`);
+    } else {
+        computerScore++;
+        console.log("You lose!");
+        console.log(`You : ${humanScore} - ${computerScore} Computer`);
+    }
+}
+
+// ********************************************* Main Execution *********************************************************
+let humanScore = 0;
+let computerScore = 0;
