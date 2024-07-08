@@ -102,3 +102,10 @@ body {
     box-shadow: #5c9bff 3px 4px 8px;
     color: #5c9bff;
 }
+
+/* ************************* Round Resume *************************** */
+
+.round-resume {
+    font-size: 24px;
+    font-weight: bold;
+}
