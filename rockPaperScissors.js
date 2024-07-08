@@ -96,19 +96,17 @@ function updateUI(winner) {
     turnsPlayed++;
 }
 
-// TODO create a function that generates a pop up with a final result and a restart game button
-// * one idea is to create the popup styles in the style.css and just generate the component and blur the
-// * screen behind the pop up.
 
 function displayFinalResult(winner) {
-    const modal = document.createElement("div").classList("result__modal");
-    const result = document.createElement("p").classList("result__text");
-    const resetButton = document
-        .createElement("button")
-        .classList("result__reset-btn");
-    const blurScreen = document
-        .createElement("div")
-        .classList("result__blur-screen");
+    const modal = document.createElement("div");
+    const result = document.createElement("p");
+    const resetButton = document.createElement("button");
+    const blurScreen = document.createElement("div");
+
+    modal.classList = "result__modal";
+    result.classList = "result__text";
+    resetButton.classList = "result__reset-btn";
+    blurScreen.classList = "result__blur-screen";
 
     if (winner === "player") {
         result.textContent = "You are the BIG WINNER! 🎉🥳🎉";
@@ -126,7 +124,7 @@ function displayFinalResult(winner) {
     modal.appendChild(result);
     modal.appendChild(resetButton);
     document.querySelector("body").appendChild(blurScreen);
-    document.querySelector("body").appendChild(modal);
+    blurScreen.appendChild(modal);
 }
 
 // ********************************************* Main Execution *********************************************************
