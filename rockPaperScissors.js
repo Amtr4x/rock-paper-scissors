@@ -53,7 +53,7 @@ function playGame() {
  */
 function handleScores(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        updateUI("drawn");
+        updateUI("nobody");
     } else if (
         (humanChoice === "rock" && computerChoice === "scissors") ||
         (humanChoice === "scissors" && computerChoice === "paper") ||
@@ -72,19 +72,13 @@ function updateUI(winner) {
     const computerPoints = document.querySelector(".marker__computer-count");
     const roundResume = document.querySelector(".round-resume");
 
-    if (turnsPlayed >= 5) {
-        displayFinalResult();
-    }
-
     if (winner === "player") {
         roundResume.textContent = "You win!";
-        roundResume.removeAttribute("style");
         roundResume.setAttribute("style", "color: #5c9bff");
 
         playerPoints.textContent = `You ${humanScore}`;
     } else if (winner === "computer") {
         roundResume.textContent = "Computer win!";
-        roundResume.removeAttribute("style");
         roundResume.setAttribute("style", "color: #ff5c5c");
 
         computerPoints.textContent = `${computerScore} Computer`;
@@ -93,9 +87,12 @@ function updateUI(winner) {
         roundResume.removeAttribute("style");
     }
 
-    turnsPlayed++;
-}
+    turnsPlayed += 1;
 
+    if (turnsPlayed === 5 || humanScore >= 3 || computerScore >= 3) {
+        displayFinalResult(winner);
+    }
+}
 
 function displayFinalResult(winner) {
     const modal = document.createElement("div");
@@ -108,9 +105,9 @@ function displayFinalResult(winner) {
     resetButton.classList = "result__reset-btn";
     blurScreen.classList = "result__blur-screen";
 
-    if (winner === "player") {
+    if (humanScore > computerScore) {
         result.textContent = "You are the BIG WINNER! 🎉🥳🎉";
-    } else if (winner === "computer") {
+    } else if (computerScore > humanScore) {
         result.textContent = "Computer wins, better luck next time! 😥";
     } else {
         result.textContent = "It's a DRAW! 🫣";
@@ -118,7 +115,7 @@ function displayFinalResult(winner) {
 
     resetButton.textContent = "Play Again! 🔄";
     resetButton.addEventListener("click", () => {
-        window.location.reload;
+        location.reload();
     });
 
     modal.appendChild(result);
