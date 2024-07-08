@@ -72,6 +72,10 @@ function updateUI(winner) {
     const computerPoints = document.querySelector(".marker__computer-count");
     const roundResume = document.querySelector(".round-resume");
 
+    if (turnsPlayed >= 5) {
+        displayFinalResult();
+    }
+
     if (winner === "player") {
         roundResume.textContent = "You win!";
         roundResume.removeAttribute("style");
@@ -95,6 +99,35 @@ function updateUI(winner) {
 // TODO create a function that generates a pop up with a final result and a restart game button
 // * one idea is to create the popup styles in the style.css and just generate the component and blur the
 // * screen behind the pop up.
+
+function displayFinalResult(winner) {
+    const modal = document.createElement("div").classList("result__modal");
+    const result = document.createElement("p").classList("result__text");
+    const resetButton = document
+        .createElement("button")
+        .classList("result__reset-btn");
+    const blurScreen = document
+        .createElement("div")
+        .classList("result__blur-screen");
+
+    if (winner === "player") {
+        result.textContent = "You are the BIG WINNER! 🎉🥳🎉";
+    } else if (winner === "computer") {
+        result.textContent = "Computer wins, better luck next time! 😥";
+    } else {
+        result.textContent = "It's a DRAW! 🫣";
+    }
+
+    resetButton.textContent = "Play Again! 🔄";
+    resetButton.addEventListener("click", () => {
+        window.location.reload;
+    });
+
+    modal.appendChild(result);
+    modal.appendChild(resetButton);
+    document.querySelector("body").appendChild(blurScreen);
+    document.querySelector("body").appendChild(modal);
+}
 
 // ********************************************* Main Execution *********************************************************
 let humanScore = 0;
