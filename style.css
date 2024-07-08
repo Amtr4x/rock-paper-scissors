@@ -1,5 +1,104 @@
 * {
+    color: #292828;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding-block: 100px;
+}
+
+/* ************************** title ******************************** */
+
+.game-title {
+    font-size: 48px;
+    text-shadow: #c2c2c2 4px 4px 5px;
+    color: #626262;
+}
+
+.rock,
+.paper,
+.scissors {
+    text-transform: uppercase;
+}
+
+.rock {
+    color: #ff5c5c;
+}
+
+.paper {
+    color: #95ff5c;
+}
+
+.scissors {
+    color: #5c9bff;
+}
+
+/* ************************** marker ******************************** */
+
+.marker {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.marker__player-count {
+    color: #5c9bff;
+}
+
+.marker__computer-count {
+    color: #ff5c5c;
+}
+
+/* *************************** Card ********************************** */
+
+.card {
+    border-radius: 5px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: #dadada 4px 4px 15px;
+}
+
+.card__help-text {
+    font-weight: 600;
+}
+
+.card__btns-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.card__btn-choice {
+    background-color: #ffffff;
+    width: 80px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    box-shadow: #c2c2c2 4px 4px 15px;
+    transition: all 0.3s;
+}
+
+.card__btn-choice#rock:hover {
+    box-shadow: #ff5c5c 3px 4px 8px;
+    color: #ff5c5c;
+}
+
+.card__btn-choice#paper:hover {
+    box-shadow: #95ff5c 3px 4px 8px;
+    color: #95ff5c;
+}
+
+.card__btn-choice#scissors:hover {
+    box-shadow: #5c9bff 3px 4px 8px;
+    color: #5c9bff;
 }
