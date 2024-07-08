@@ -53,21 +53,48 @@ function playGame() {
  */
 function handleScores(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        console.log("Game drawn!");
+        updateUI("drawn");
     } else if (
         (humanChoice === "rock" && computerChoice === "scissors") ||
         (humanChoice === "scissors" && computerChoice === "paper") ||
         (humanChoice === "paper" && computerChoice === "rock")
     ) {
         humanScore++;
-        console.log("You win!");
-        console.log(`You : ${humanScore} - ${computerScore} Computer`);
+        updateUI("player");
     } else {
         computerScore++;
-        console.log("You lose!");
-        console.log(`You : ${humanScore} - ${computerScore} Computer`);
+        updateUI("computer");
     }
 }
+
+function updateUI(winner) {
+    const playerPoints = document.querySelector(".marker__player-count");
+    const computerPoints = document.querySelector(".marker__computer-count");
+    const roundResume = document.querySelector(".round-resume");
+
+    if (winner === "player") {
+        roundResume.textContent = "You win!";
+        roundResume.removeAttribute("style");
+        roundResume.setAttribute("style", "color: #5c9bff");
+
+        playerPoints.textContent = `You ${humanScore}`;
+    } else if (winner === "computer") {
+        roundResume.textContent = "Computer win!";
+        roundResume.removeAttribute("style");
+        roundResume.setAttribute("style", "color: #ff5c5c");
+
+        computerPoints.textContent = `${computerScore} Computer`;
+    } else {
+        roundResume.textContent = "GAME DRAWN!";
+        roundResume.removeAttribute("style");
+    }
+
+    turnsPlayed++;
+}
+
+// TODO create a function that generates a pop up with a final result and a restart game button
+// * one idea is to create the popup styles in the style.css and just generate the component and blur the
+// * screen behind the pop up.
 
 // ********************************************* Main Execution *********************************************************
 let humanScore = 0;
