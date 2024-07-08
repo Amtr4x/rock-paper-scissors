@@ -7,5 +7,27 @@
         <script src="./rockPaperScissors.js" defer></script>
         <title>Rock Paper Scissors</title>
     </head>
-    <body></body>
+    <body>
+        <h1 class="game-title">
+            <span class="rock">Rock</span> <span class="paper">Paper</span> &
+            <span class="scissors">Scissors</span>!
+        </h1>
+        <div class="card">
+            <p class="marker">
+                <span class="marker__player-count">You 0</span> -
+                <span class="marker__computer-count">0 Computer</span>
+            </p>
+
+            <p class="card__help-text">
+                Choose the options touching the buttons:
+            </p>
+
+            <div class="card__btns-container">
+                <button class="card__btn-choice" id="rock">Rock</button>
+                <button class="card__btn-choice" id="paper">Paper</button>
+                <button class="card__btn-choice" id="scissors">Scissors</button>
+            </div>
+        </div>
+        <p class="round-resume">Let's play!</p>
+    </body>
 </html>

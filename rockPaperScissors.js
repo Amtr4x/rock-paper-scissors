@@ -1,5 +1,3 @@
-// @ts-check
-
 /**
  * Generates a random computer choice from the set ["ROCK", "PAPER", "SCISSORS"].
  *
@@ -19,29 +17,31 @@ function getComputerChoice() {
 }
 
 /**
- * Prompts the user to input their choice among "rock", "paper", or "scissors".
- * Keeps prompting until a valid choice is entered.
- *
- * @returns {string} The user's entered choice, converted to the correct case (e.g., "ROCK").
+ * Sets up the event listener for the game buttons, allowing the human player to make a choice.
+ * Handles the human player's choice, generates the computer's choice, and updates the scores
+ * based on the outcome of each round.
  */
-function getHumanChoice() {
-    let choice = "";
+function playGame() {
+    let humanChoice = "";
+    const buttonPanel = document.querySelector(".card__btns-container");
 
-    while (
-        choice.toLowerCase() !== "rock" &&
-        choice.toLowerCase() !== "paper" &&
-        choice.toLowerCase() !== "scissors"
-    ) {
-        let input = prompt(
-            "(Rock, Paper, Scissors)\nPlease introduce your choice: "
-        );
+    buttonPanel.addEventListener("click", (e) => {
+        const buttonPressed = e.target;
 
-        if (input !== null) {
-            choice = input;
+        switch (buttonPressed.id) {
+            case "rock":
+                humanChoice = "rock";
+                break;
+            case "paper":
+                humanChoice = "paper";
+                break;
+            case "scissors":
+                humanChoice = "scissors";
+                break;
         }
-    }
 
-    return choice.toLowerCase();
+        handleScores(humanChoice, getComputerChoice());
+    });
 }
 
 /**
@@ -51,42 +51,91 @@ function getHumanChoice() {
  * @param {string} humanChoice - The human player's choice, which should be either "rock", "paper", or "scissors".
  * @param {string} computerChoice - The computer's choice, which should be either "rock", "paper", or "scissors".
  */
-function playRound(humanChoice, computerChoice) {
+function handleScores(humanChoice, computerChoice) {
     if (humanChoice === computerChoice) {
-        console.log("Game drawn!");
+        updateUI("nobody");
     } else if (
         (humanChoice === "rock" && computerChoice === "scissors") ||
         (humanChoice === "scissors" && computerChoice === "paper") ||
         (humanChoice === "paper" && computerChoice === "rock")
     ) {
         humanScore++;
-        console.log("You win!");
-        console.log(`You : ${humanScore} - ${computerScore} Computer`);
+        updateUI("player");
     } else {
         computerScore++;
-        console.log("You lose!");
-        console.log(`You : ${humanScore} - ${computerScore} Computer`);
+        updateUI("computer");
     }
 }
 
 /**
- * Plays a full game of Rock, Paper, Scissors, consisting of 5 rounds.
- * Displays the results of each round and the final winner based on scores.
+ * Update UI components to display the round advances.
+ * When the game is over, it displays the winner.
+ *
+ * @param {String} winner - used to manage the marker
  */
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-        playRound(getHumanChoice(), getComputerChoice());
+function updateUI(winner) {
+    const playerPoints = document.querySelector(".marker__player-count");
+    const computerPoints = document.querySelector(".marker__computer-count");
+    const roundResume = document.querySelector(".round-resume");
+
+    if (winner === "player") {
+        roundResume.textContent = "You win!";
+        roundResume.setAttribute("style", "color: #5c9bff");
+
+        playerPoints.textContent = `You ${humanScore}`;
+    } else if (winner === "computer") {
+        roundResume.textContent = "Computer win!";
+        roundResume.setAttribute("style", "color: #ff5c5c");
+
+        computerPoints.textContent = `${computerScore} Computer`;
+    } else {
+        roundResume.textContent = "GAME DRAWN!";
+        roundResume.removeAttribute("style");
     }
 
-    console.log(
-        `The final winner ${
-            humanScore > computerScore ? "are You!!!" : "is the Computer :("
-        }`
-    );
+    turnsPlayed++;
+
+    if (turnsPlayed === 5 || humanScore >= 3 || computerScore >= 3) {
+        displayFinalResult();
+    }
+}
+
+/**
+ * Display the final result of the game throughout a modal.
+ */
+function displayFinalResult() {
+    const modal = document.createElement("div");
+    const result = document.createElement("p");
+    const resetButton = document.createElement("button");
+    const blurScreen = document.createElement("div");
+
+    modal.classList = "result__modal";
+    result.classList = "result__text";
+    resetButton.classList = "result__reset-btn";
+    blurScreen.classList = "result__blur-screen";
+
+    if (humanScore > computerScore) {
+        result.textContent = "You are the BIG WINNER! 🎉🥳🎉";
+    } else if (computerScore > humanScore) {
+        result.textContent = "Computer wins, better luck next time! 😥";
+    } else {
+        result.textContent = "It's a DRAW! 🫣";
+    }
+
+    resetButton.textContent = "Play Again! 🔄";
+    resetButton.addEventListener("click", () => {
+        location.reload();
+    });
+
+    modal.appendChild(result);
+    modal.appendChild(resetButton);
+    document.querySelector("body").appendChild(blurScreen);
+    blurScreen.appendChild(modal);
 }
 
 // ********************************************* Main Execution *********************************************************
 let humanScore = 0;
 let computerScore = 0;
+let turnsPlayed = 0;
 
 playGame();
