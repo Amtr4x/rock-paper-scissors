@@ -67,6 +67,12 @@ function handleScores(humanChoice, computerChoice) {
     }
 }
 
+/**
+ * Update UI components to display the round advances.
+ * When the game is over, it displays the winner.
+ *
+ * @param {String} winner - used to manage the marker
+ */
 function updateUI(winner) {
     const playerPoints = document.querySelector(".marker__player-count");
     const computerPoints = document.querySelector(".marker__computer-count");
@@ -87,14 +93,17 @@ function updateUI(winner) {
         roundResume.removeAttribute("style");
     }
 
-    turnsPlayed += 1;
+    turnsPlayed++;
 
     if (turnsPlayed === 5 || humanScore >= 3 || computerScore >= 3) {
-        displayFinalResult(winner);
+        displayFinalResult();
     }
 }
 
-function displayFinalResult(winner) {
+/**
+ * Display the final result of the game throughout a modal.
+ */
+function displayFinalResult() {
     const modal = document.createElement("div");
     const result = document.createElement("p");
     const resetButton = document.createElement("button");
